@@ -12,15 +12,20 @@
 }
 
 /* Base general del sitio */
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden; /* FIX: html es quien realmente controla el scroll en muchos navegadores */
+  width: 100%;
+}
+
 body {
   background-color: var(--color-negro);
   color: var(--color-crema);
   font-family: 'Montserrat', sans-serif;
   overflow-x: hidden;
+  max-width: 100%; /* FIX */
   cursor: none;
 }
-
-html { scroll-behavior: smooth; }
 
 /* Cursor personalizado (punto + anillo que sigue al mouse) */
 .cursor-punto {
@@ -291,6 +296,8 @@ html { scroll-behavior: smooth; }
   transform: translate(-50%, -50%);
   pointer-events: none;
   letter-spacing: 0.05em;
+  max-width: 100vw; /* FIX: evita que la caja del texto empuje el ancho del documento */
+  overflow: hidden; /* FIX */
 }
 
 .linea-decorativa-izquierda,
@@ -820,4 +827,7 @@ html { scroll-behavior: smooth; }
 
   .icono-red-social { width: 46px; height: 46px; }
   .pie-pagina { padding: 4rem 1.4rem 2.6rem; }
+
+  /* FIX: el marco decorativo se salía por la izquierda y generaba scroll horizontal */
+  .marco-decorativo { left: 0; top: 0; }
 }
