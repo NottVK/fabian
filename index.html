@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VAALEN — Alta Costura</title>
+
+<!-- Bootstrap 5 -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Fuentes de Google -->
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Montserrat:wght@200;300;400;500;600&family=Cormorant+Garamond:ital,wght@0,300;1,300;1,400&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+
+<!-- Cursor personalizado que sigue al mouse -->
+<div class="cursor-punto" id="cursor-punto"></div>
+<div class="cursor-anillo" id="cursor-anillo"></div>
+
+<!-- Barra de navegación fija -->
+<nav class="navbar navbar-expand-lg fixed-top barra-navegacion" id="barra-principal">
+  <div class="container-fluid d-flex justify-content-between align-items-center">
+    <a href="#inicio" class="logo-marca">VAALEN</a>
+    <ul class="navbar-nav flex-row gap-4 d-none d-md-flex">
+      <li class="nav-item"><a href="#colecciones" class="enlace-nav">Colecciones</a></li>
+      <li class="nav-item"><a href="#disenadora" class="enlace-nav">Nuestra Esencia</a></li>
+      <li class="nav-item"><a href="#contacto" class="enlace-nav">Contacto</a></li>
+      <li class="nav-item"><a href="#redes" class="enlace-nav">Redes</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Sección de inicio: fondo, título fantasma decorativo y texto de bienvenida con su botón -->
+<section class="seccion-inicio position-relative d-flex align-items-center justify-content-center overflow-hidden" id="inicio">
+  <div class="fondo-heroe position-absolute top-0 start-0 w-100 h-100"></div>
+  <div class="texto-fantasma-heroe position-absolute">VAALEN</div>
+  <div class="linea-decorativa-izquierda position-absolute top-0 bottom-0 start-0 ms-5"></div>
+  <div class="linea-decorativa-derecha position-absolute top-0 bottom-0 end-0 me-5"></div>
+
+  <div class="position-relative text-center" style="z-index: 2;">
+    <p class="subtitulo-heroe">Diseño de Moda · Alta Costura Colombiana</p>
+    <h1 class="titulo-principal">V<em class="letra-roja">AA</em>LEN</h1>
+    <p class="frase-heroe">Prendas que hablan donde las palabras callan</p>
+    <a href="#colecciones" class="boton-ver-colecciones d-inline-block text-decoration-none">
+      <span class="texto-boton-heroe">Explorar Colecciones</span>
+    </a>
+  </div>
+
+  <div class="indicador-scroll position-absolute bottom-0 start-50 translate-middle-x mb-4 d-flex flex-column align-items-center gap-2">
+    <div class="linea-scroll"></div>
+    <span class="texto-scroll">Scroll</span>
+  </div>
+</section>
+
+<!-- Sección de colecciones: encabezado con etiqueta/título/subtítulo y el carrusel de tarjetas -->
+<section class="seccion-colecciones" id="colecciones">
+  <div class="container-fluid">
+
+    <div class="text-center mb-5 elemento-revelado">
+      <p class="etiqueta-seccion">Temporada 2025</p>
+      <h2 class="titulo-seccion">Colecciones</h2>
+      <div class="divisor-rojo"></div>
+      <p class="subtitulo-seccion">Cada prenda, una historia. Cada hilo, una emoción.</p>
+    </div>
+
+    <div class="carrusel-colecciones elemento-revelado retraso-1">
+
+      <button type="button" class="flecha-carrusel flecha-anterior" id="flecha-anterior" aria-label="Anterior">
+        <svg viewBox="0 0 24 24"><path d="M15.5 3.5 6 12l9.5 8.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+
+      <div class="viewport-carrusel">
+        <div class="pista-carrusel" id="pista-carrusel">
+
+          <div class="col-carrusel">
+            <div class="tarjeta-coleccion" tabindex="0"
+                 data-titulo="Rouge Minuit"
+                 data-categoria="Colección Nocturna"
+                 data-descripcion="Elegancia que trasciende la noche"
+                 data-detalle="Rouge Minuit nace del instante en que la noche se vuelve cómplice. Cortes envolventes en seda y terciopelo, bordados a mano en hilo carmesí, pensados para la mujer que hace de cada entrada un momento memorable."
+                 data-piezas="14 piezas"
+                 data-tela="Seda, terciopelo y encaje francés"
+                 data-imagen="imagen-coleccion-1">
+              <div class="imagen-tarjeta imagen-coleccion-1"></div>
+              <span class="insignia-destacado">Destacado</span>
+              <div class="capa-hover-tarjeta">
+                <div class="informacion-tarjeta">
+                  <p class="categoria-tarjeta">Colección Nocturna</p>
+                  <h3 class="nombre-tarjeta">Rouge Minuit</h3>
+                  <p class="descripcion-tarjeta">Elegancia que trasciende la noche</p>
+                  <span class="ver-mas-tarjeta">Ver detalles +</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-carrusel">
+            <div class="tarjeta-coleccion" tabindex="0"
+                 data-titulo="Vino & Seda"
+                 data-categoria="Colección Formal"
+                 data-descripcion="Sofisticación en cada detalle"
+                 data-detalle="Vino & Seda celebra la formalidad sin perder calidez. Siluetas estructuradas, caídas fluidas y una paleta profunda que acompaña desde una velada íntima hasta una gala, sin sacrificar comodidad."
+                 data-piezas="18 piezas"
+                 data-tela="Seda cruda y crepé italiano"
+                 data-imagen="imagen-coleccion-2">
+              <div class="imagen-tarjeta imagen-coleccion-2"></div>
+              <div class="capa-hover-tarjeta">
+                <div class="informacion-tarjeta">
+                  <p class="categoria-tarjeta">Colección Formal</p>
+                  <h3 class="nombre-tarjeta">Vino &amp; Seda</h3>
+                  <p class="descripcion-tarjeta">Sofisticación en cada detalle</p>
+                  <span class="ver-mas-tarjeta">Ver detalles +</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-carrusel">
+            <div class="tarjeta-coleccion" tabindex="0"
+                 data-titulo="Alma Escarlata"
+                 data-categoria="Edición Limitada"
+                 data-descripcion="Para quien se atreve a brillar"
+                 data-detalle="Alma Escarlata es una edición limitada de piezas únicas, cada una intervenida a mano. Un homenaje a la audacia, con acabados en pedrería y cortes asimétricos que desafían lo convencional."
+                 data-piezas="8 piezas únicas"
+                 data-tela="Tafetán de seda y pedrería"
+                 data-imagen="imagen-coleccion-3">
+              <div class="imagen-tarjeta imagen-coleccion-3"></div>
+              <div class="capa-hover-tarjeta">
+                <div class="informacion-tarjeta">
+                  <p class="categoria-tarjeta">Edición Limitada</p>
+                  <h3 class="nombre-tarjeta">Alma Escarlata</h3>
+                  <p class="descripcion-tarjeta">Para quien se atreve a brillar</p>
+                  <span class="ver-mas-tarjeta">Ver detalles +</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <button type="button" class="flecha-carrusel flecha-siguiente" id="flecha-siguiente" aria-label="Siguiente">
+        <svg viewBox="0 0 24 24"><path d="m8.5 3.5 9.5 8.5-9.5 8.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+
+    </div>
+
+    <div class="puntos-carrusel" id="puntos-carrusel"></div>
+
+  </div>
+</section>
+
+<!-- Sección de la diseñadora: foto con marco decorativo y el bloque de texto/estadísticas -->
+<section class="seccion-disenadora" id="disenadora">
+  <div class="container">
+    <div class="row align-items-center g-5">
+
+      <div class="col-lg-5 elemento-revelado">
+      <div class="position-relative">
+  <img src="vaal.jpeg" alt="Valen, diseñadora de Vaalen" class="imagen-disenadora">
+  <div class="marco-decorativo"></div>
+  <div class="cuadro-acento-rojo"></div>
+</div>
+      </div>
+
+      <div class="col-lg-7 elemento-revelado retraso-2">
+        <p class="etiqueta-seccion">La Mente Creativa</p>
+        <h2 class="titulo-seccion">Valentina Florez</h2>
+        <div class="divisor-rojo ms-0"></div>
+
+        <blockquote class="cita-disenadora">
+          "El arte de vestir."
+        </blockquote>
+
+        <p class="biografia-disenadora">
+            Más que diseñar prendas, creamos experiencias que reflejan personalidad y sofisticación. Cada colección nace del equilibrio entre la tradición artesanal y la innovación, convirtiendo cada pieza en una expresión de elegancia atemporal.
+
+Nuestro propósito es vestir a mujeres que valoran la calidad, el diseño y la autenticidad en cada detalle.
+         </p>
+
+        <div class="d-flex gap-4 mb-4">
+          <div>
+           
+            <div class="etiqueta-estadistica">Diseño personalizado</div>
+          </div>
+          <div>
+           
+            <div class="etiqueta-estadistica">Piezas únicas</div>
+          </div>
+          <div>
+            
+            <div class="etiqueta-estadistica">Hecho a mano</div>
+          </div>
+        </div>
+
+        <a href="#contacto" class="boton-agendar-cita d-inline-block text-decoration-none">Agendar una cita</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Sección de contacto: encabezado, formulario y datos de contacto -->
+<section class="seccion-contacto" id="contacto">
+  <div class="container">
+    <div class="mx-auto" style="max-width: 720px;">
+
+      <div class="text-center mb-5 elemento-revelado">
+        <p class="etiqueta-seccion">Hablemos</p>
+        <h2 class="titulo-seccion">Contacto</h2>
+        <div class="divisor-rojo"></div>
+        <p class="subtitulo-seccion">Cada gran prenda empieza con una conversación</p>
+      </div>
+
+      <form>
+        <div class="row elemento-revelado retraso-1">
+
+          <div class="col-md-6 mb-3">
+            <label class="etiqueta-campo form-label">Nombre</label>
+            <input type="text" class="campo-texto form-control" placeholder="Tu nombre">
+          </div>
+
+          <div class="col-md-6 mb-3">
+            <label class="etiqueta-campo form-label">Email</label>
+            <input type="email" class="campo-texto form-control" placeholder="tu@correo.com">
+          </div>
+
+          <div class="col-md-6 mb-3">
+            <label class="etiqueta-campo form-label">Teléfono</label>
+            <input type="tel" class="campo-texto form-control" placeholder="+57 300 000 0000">
+          </div>
+
+          <div class="col-md-6 mb-3">
+            <label class="etiqueta-campo form-label">Tipo de consulta</label>
+            <input type="text" class="campo-texto form-control" placeholder="Diseño personalizado / Pedido...">
+          </div>
+
+          <div class="col-12 mb-3">
+            <label class="etiqueta-campo form-label">Mensaje</label>
+            <textarea class="campo-texto form-control" rows="4" placeholder="Cuéntanos sobre tu visión..."></textarea>
+          </div>
+
+        </div>
+
+        <button type="submit" class="boton-enviar-mensaje btn w-100 py-3 mt-2 elemento-revelado retraso-2">Enviar Mensaje</button>
+      </form>
+
+      <div class="d-flex flex-column flex-md-row justify-content-center gap-5 mt-5 pt-4 border-top border-secondary-subtle elemento-revelado retraso-3">
+        <div class="text-center text-md-start">
+          <p class="etiqueta-contacto mb-1">Email</p>
+          <p class="valor-contacto">hola@vaalen.co</p>
+        </div>
+        <div class="text-center text-md-start">
+          <p class="etiqueta-contacto mb-1">WhatsApp</p>
+          <p class="valor-contacto">+57 300 000 0000</p>
+        </div>
+        <div class="text-center text-md-start">
+          <p class="etiqueta-contacto mb-1">Ciudad</p>
+          <p class="valor-contacto">Colombia</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Pie de página: mensaje de cierre, iconos de redes sociales y créditos -->
+<footer class="pie-pagina" id="redes">
+
+  <p class="titulo-redes-sociales elemento-revelado">Síguenos y sé parte de la historia</p>
+
+  <ul class="list-unstyled d-flex justify-content-center gap-4 mb-5 elemento-revelado retraso-1">
+
+    <li>
+      <a href="https://www.instagram.com/valen_99/" class="enlace-red-social d-flex flex-column align-items-center gap-2">
+        <div class="icono-red-social">
+          <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        </div>
+        <span class="nombre-red-social">Instagram</span>
+      </a>
+    </li>
+
+    <li>
+      <a href="https://www.tiktok.com/@valenfloreezz" class="enlace-red-social d-flex flex-column align-items-center gap-2">
+        <div class="icono-red-social">
+          <svg viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+        </div>
+        <span class="nombre-red-social">TikTok</span>
+      </a>
+    </li>
+
+    <li>
+      <a href="https://wa.me/573118169181" class="enlace-red-social d-flex flex-column align-items-center gap-2">
+        <div class="icono-red-social">
+          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        </div>
+        <span class="nombre-red-social">WhatsApp</span>
+      </a>
+    </li>
+
+   
+  </ul>
+
+  <span class="logo-fantasma-footer d-block elemento-revelado">VAALEN</span>
+  <p class="texto-derechos elemento-revelado">© 2025 Vaalen · Diseño con alma · Todos los derechos reservados.</p>
+
+</footer>
+
+<!-- Modal de detalle de colección/prenda -->
+<div class="overlay-modal" id="overlay-modal">
+  <div class="tarjeta-modal">
+    <button type="button" class="cerrar-modal" id="cerrar-modal" aria-label="Cerrar">
+      <svg viewBox="0 0 24 24"><path d="M4 4l16 16M20 4 4 20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+    </button>
+
+    <div class="imagen-modal" id="imagen-modal"></div>
+
+    <div class="contenido-modal">
+      <p class="categoria-modal" id="categoria-modal"></p>
+      <h3 class="titulo-modal" id="titulo-modal"></h3>
+      <div class="divisor-rojo ms-0"></div>
+      <p class="descripcion-modal" id="descripcion-modal"></p>
+
+      <div class="detalles-modal">
+        <div>
+          <p class="etiqueta-detalle-modal">Piezas</p>
+          <p class="valor-detalle-modal" id="piezas-modal"></p>
+        </div>
+        <div>
+          <p class="etiqueta-detalle-modal">Materiales</p>
+          <p class="valor-detalle-modal" id="tela-modal"></p>
+        </div>
+      </div>
+
+      <a href="#contacto" class="boton-agendar-cita d-inline-block text-decoration-none" id="cita-modal">Agendar una cita</a>
+    </div>
+  </div>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<script src="script.js"></script>
+</body>
+</html>

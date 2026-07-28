@@ -1,0 +1,200 @@
+// Cursor personalizado que sigue al puntero del mouse
+const cursoPunto  = document.getElementById('cursor-punto');
+const cursoAnillo = document.getElementById('cursor-anillo');
+let ratonX = 0, ratonY = 0, anilloX = 0, anilloY = 0;
+
+document.addEventListener('mousemove', function(e) {
+  ratonX = e.clientX;
+  ratonY = e.clientY;
+  cursoPunto.style.left = ratonX + 'px';
+  cursoPunto.style.top  = ratonY + 'px';
+});
+
+(function animarAnillo() {
+  anilloX += (ratonX - anilloX) * 0.12;
+  anilloY += (ratonY - anilloY) * 0.12;
+  cursoAnillo.style.left = anilloX + 'px';
+  cursoAnillo.style.top  = anilloY + 'px';
+  requestAnimationFrame(animarAnillo);
+})();
+
+function activarCursorHover(elemento) {
+  elemento.addEventListener('mouseenter', function() {
+    cursoPunto.style.transform  = 'translate(-50%, -50%) scale(2.5)';
+    cursoAnillo.style.width      = '50px';
+    cursoAnillo.style.height     = '50px';
+    cursoAnillo.style.borderColor = 'rgba(196, 30, 58, 0.7)';
+  });
+  elemento.addEventListener('mouseleave', function() {
+    cursoPunto.style.transform  = 'translate(-50%, -50%) scale(1)';
+    cursoAnillo.style.width      = '30px';
+    cursoAnillo.style.height     = '30px';
+    cursoAnillo.style.borderColor = 'rgba(196, 30, 58, 0.5)';
+  });
+}
+
+document.querySelectorAll('a, button, .tarjeta-coleccion').forEach(activarCursorHover);
+
+// Le agrega fondo a la barra de navegación al hacer scroll
+const barraPrincipal = document.getElementById('barra-principal');
+window.addEventListener('scroll', function() {
+  if (window.scrollY > 80) {
+    barraPrincipal.classList.add('con-fondo');
+  } else {
+    barraPrincipal.classList.remove('con-fondo');
+  }
+});
+
+// Revela los elementos con la clase .elemento-revelado al hacer scroll
+const observadorScroll = new IntersectionObserver(function(entradas) {
+  entradas.forEach(function(entrada) {
+    if (entrada.isIntersecting) {
+      entrada.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.12 });
+
+document.querySelectorAll('.elemento-revelado').forEach(function(elemento) {
+  observadorScroll.observe(elemento);
+});
+
+// ===== Carrusel de colecciones =====
+const pistaCarrusel     = document.getElementById('pista-carrusel');
+const flechaAnterior    = document.getElementById('flecha-anterior');
+const flechaSiguiente   = document.getElementById('flecha-siguiente');
+const contenedorPuntos  = document.getElementById('puntos-carrusel');
+const columnasCarrusel  = pistaCarrusel ? Array.from(pistaCarrusel.children) : [];
+
+let indiceActual = 0;
+let porVista = 3;
+
+function calcularPorVista() {
+  const ancho = window.innerWidth;
+  if (ancho <= 640) return 1;
+  if (ancho <= 991) return 2;
+  return 3;
+}
+
+function totalPaginas() {
+  return Math.max(1, columnasCarrusel.length - porVista + 1);
+}
+
+function construirPuntos() {
+  if (!contenedorPuntos) return;
+  contenedorPuntos.innerHTML = '';
+  const paginas = totalPaginas();
+  for (let i = 0; i < paginas; i++) {
+    const punto = document.createElement('button');
+    punto.type = 'button';
+    punto.className = 'punto-carrusel' + (i === indiceActual ? ' activo' : '');
+    punto.setAttribute('aria-label', 'Ir a la tarjeta ' + (i + 1));
+    punto.addEventListener('click', function() {
+      indiceActual = i;
+      actualizarCarrusel();
+    });
+    activarCursorHover(punto);
+    contenedorPuntos.appendChild(punto);
+  }
+}
+
+function actualizarCarrusel() {
+  if (!pistaCarrusel || columnasCarrusel.length === 0) return;
+
+  porVista = calcularPorVista();
+  const maxIndice = totalPaginas() - 1;
+  if (indiceActual > maxIndice) indiceActual = maxIndice;
+  if (indiceActual < 0) indiceActual = 0;
+
+  const anchoColumna = columnasCarrusel[0].getBoundingClientRect().width;
+  const estiloComputado = getComputedStyle(pistaCarrusel);
+  const espacio = parseFloat(estiloComputado.gap) || 0;
+  const desplazamiento = indiceActual * (anchoColumna + espacio);
+
+  pistaCarrusel.style.transform = 'translateX(-' + desplazamiento + 'px)';
+
+  if (flechaAnterior) flechaAnterior.disabled = indiceActual === 0;
+  if (flechaSiguiente) flechaSiguiente.disabled = indiceActual >= maxIndice;
+
+  if (contenedorPuntos) {
+    Array.from(contenedorPuntos.children).forEach(function(punto, i) {
+      punto.classList.toggle('activo', i === indiceActual);
+    });
+  }
+}
+
+if (flechaSiguiente) {
+  flechaSiguiente.addEventListener('click', function() {
+    indiceActual++;
+    actualizarCarrusel();
+  });
+}
+
+if (flechaAnterior) {
+  flechaAnterior.addEventListener('click', function() {
+    indiceActual--;
+    actualizarCarrusel();
+  });
+}
+
+window.addEventListener('resize', function() {
+  construirPuntos();
+  actualizarCarrusel();
+});
+
+if (pistaCarrusel) {
+  construirPuntos();
+  actualizarCarrusel();
+}
+
+// ===== Modal de detalle de colección =====
+const overlayModal      = document.getElementById('overlay-modal');
+const cerrarModalBoton   = document.getElementById('cerrar-modal');
+const imagenModal        = document.getElementById('imagen-modal');
+const categoriaModal     = document.getElementById('categoria-modal');
+const tituloModal        = document.getElementById('titulo-modal');
+const descripcionModal   = document.getElementById('descripcion-modal');
+const piezasModal        = document.getElementById('piezas-modal');
+const telaModal          = document.getElementById('tela-modal');
+
+function abrirModal(tarjeta) {
+  const datos = tarjeta.dataset;
+
+  imagenModal.className = 'imagen-modal ' + (datos.imagen || '');
+  categoriaModal.textContent   = datos.categoria || '';
+  tituloModal.textContent      = datos.titulo || '';
+  descripcionModal.textContent = datos.detalle || datos.descripcion || '';
+  piezasModal.textContent      = datos.piezas || '—';
+  telaModal.textContent        = datos.tela || '—';
+
+  overlayModal.classList.add('activo');
+  document.body.style.overflow = 'hidden';
+}
+
+function cerrarModal() {
+  overlayModal.classList.remove('activo');
+  document.body.style.overflow = '';
+}
+
+document.querySelectorAll('.tarjeta-coleccion').forEach(function(tarjeta) {
+  tarjeta.addEventListener('click', function() {
+    abrirModal(tarjeta);
+  });
+  tarjeta.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      abrirModal(tarjeta);
+    }
+  });
+});
+
+if (cerrarModalBoton) cerrarModalBoton.addEventListener('click', cerrarModal);
+
+if (overlayModal) {
+  overlayModal.addEventListener('click', function(e) {
+    if (e.target === overlayModal) cerrarModal();
+  });
+}
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') cerrarModal();
+});
