@@ -198,3 +198,94 @@ if (overlayModal) {
 document.addEventListener('keydown', function(e) {
   if (e.key === 'Escape') cerrarModal();
 });
+
+// ===== Menú móvil (hamburguesa) =====
+const botonHamburguesa = document.getElementById('boton-hamburguesa');
+const overlayMenuMovil = document.getElementById('overlay-menu-movil');
+const cerrarMenuMovilBoton = document.getElementById('cerrar-menu-movil');
+
+function abrirMenuMovil() {
+  overlayMenuMovil.classList.add('activo');
+  botonHamburguesa.classList.add('activo');
+  botonHamburguesa.setAttribute('aria-expanded', 'true');
+  document.body.style.overflow = 'hidden';
+}
+
+function cerrarMenuMovil() {
+  overlayMenuMovil.classList.remove('activo');
+  botonHamburguesa.classList.remove('activo');
+  botonHamburguesa.setAttribute('aria-expanded', 'false');
+  document.body.style.overflow = '';
+}
+
+if (botonHamburguesa) {
+  botonHamburguesa.addEventListener('click', function() {
+    if (overlayMenuMovil.classList.contains('activo')) {
+      cerrarMenuMovil();
+    } else {
+      abrirMenuMovil();
+    }
+  });
+}
+
+if (cerrarMenuMovilBoton) cerrarMenuMovilBoton.addEventListener('click', cerrarMenuMovil);
+
+document.querySelectorAll('.enlace-nav-movil').forEach(function(enlace) {
+  enlace.addEventListener('click', cerrarMenuMovil);
+  activarCursorHover(enlace);
+});
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape' && overlayMenuMovil && overlayMenuMovil.classList.contains('activo')) {
+    cerrarMenuMovil();
+  }
+});
+
+// ===== Buscador del hero =====
+const formularioBuscador = document.getElementById('formulario-buscador');
+const campoBuscador = document.getElementById('campo-buscador');
+
+function normalizarTexto(texto) {
+  return (texto || '')
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .trim();
+}
+
+if (formularioBuscador) {
+  formularioBuscador.addEventListener('submit', function(e) {
+    e.preventDefault();
+    const consulta = normalizarTexto(campoBuscador.value);
+
+    if (!consulta) return;
+
+    const tarjetaEncontrada = columnasCarrusel
+      .map(function(col) { return col.querySelector('.tarjeta-coleccion'); })
+      .find(function(tarjeta) {
+        const datos = tarjeta.dataset;
+        return normalizarTexto(datos.titulo).includes(consulta) ||
+               normalizarTexto(datos.categoria).includes(consulta) ||
+               normalizarTexto(datos.descripcion).includes(consulta);
+      });
+
+    if (tarjetaEncontrada) {
+      const indiceEncontrado = columnasCarrusel.findIndex(function(col) {
+        return col.contains(tarjetaEncontrada);
+      });
+
+      cerrarMenuMovil();
+      document.getElementById('colecciones').scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+      const maxIndice = totalPaginas() - 1;
+      indiceActual = Math.min(indiceEncontrado, maxIndice);
+      actualizarCarrusel();
+
+      setTimeout(function() { abrirModal(tarjetaEncontrada); }, 550);
+    } else {
+      formularioBuscador.classList.remove('sin-resultado');
+      void formularioBuscador.offsetWidth;
+      formularioBuscador.classList.add('sin-resultado');
+    }
+  });
+}
