@@ -42,7 +42,7 @@
 
   <form class="buscador-heroe buscador-menu-movil" id="formulario-buscador">
     <input type="text" class="campo-buscador" id="campo-buscador" placeholder="Buscar una colección o prenda...">
-    <button type="submit" class="boton-buscador" aria-label="Buscar">
+    <button type="submit" class="btn boton-buscador" aria-label="Buscar">
       <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="m20 20-3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
     </button>
   </form>
@@ -69,7 +69,7 @@
     <h1 class="titulo-principal">V<em class="letra-roja">AA</em>LEN</h1>
     <p class="frase-heroe">Prendas que hablan donde las palabras callan</p>
 
-    <a href="#colecciones" class="boton-ver-colecciones d-inline-block text-decoration-none">
+    <a href="#colecciones" class="btn boton-ver-colecciones d-inline-block text-decoration-none">
       <span class="texto-boton-heroe">Explorar Colecciones</span>
     </a>
   </div>
@@ -80,7 +80,7 @@
   </div>
 </section>
 
-<!-- colecciones: carrusel de tarjetas -->
+<!-- colecciones: carrusel de Bootstrap con cards -->
 <section class="seccion-colecciones" id="colecciones">
   <div class="container-fluid">
 
@@ -91,92 +91,95 @@
       <p class="subtitulo-seccion">Cada prenda, una historia. Cada hilo, una emoción.</p>
     </div>
 
-    <div class="carrusel-colecciones elemento-revelado retraso-1">
+    <div id="carruselColecciones" class="carousel slide carrusel-colecciones elemento-revelado retraso-1" data-bs-ride="false">
 
-      <button type="button" class="flecha-carrusel flecha-anterior" id="flecha-anterior" aria-label="Anterior">
-        <svg viewBox="0 0 24 24"><path d="M15.5 3.5 6 12l9.5 8.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </button>
-
-      <div class="viewport-carrusel">
-        <div class="pista-carrusel" id="pista-carrusel">
-
-          <div class="col-carrusel">
-            <div class="tarjeta-coleccion" tabindex="0"
-                 data-titulo="Llanto de una gargola"
-                 data-categoria="Colección Nocturna"
-                 data-descripcion="Elegancia que trasciende la noche"
-                 data-detalle="“El llanto de una gárgola” representa la dualidad entre fortaleza y vulnerabilidad. A través de estructuras rígidas, texturas ásperas y tonos oscuros, la pieza simboliza el dolor oculto de quienes permanecen fuertes mientras guardan en silencio sus emociones.."
-                 data-piezas="14 piezas"
-                 data-tela="Seda, terciopelo y encaje francés"
-                 data-imagen="imagen-coleccion-1"
-                 data-imagen-src="fto/primero.jpeg">
-             <img class="imagen-tarjeta" src="fto/primero.jpeg" alt="Rouge Minuit">
-              <span class="insignia-destacado">Destacado</span>
-              <div class="capa-hover-tarjeta">
-                <div class="informacion-tarjeta">
-                  <p class="categoria-tarjeta">Colección Nocturna</p>
-                  <h3 class="nombre-tarjeta">Llanto De Una Gargola</h3>
-                  <p class="descripcion-tarjeta">Elegancia que trasciende la noche</p>
-                  <span class="ver-mas-tarjeta">Ver detalles +</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-carrusel">
-            <div class="tarjeta-coleccion" tabindex="0"
-                 data-titulo="Volatidad"
-                 data-categoria="Colección Formal"
-                 data-descripcion="Sofisticación en cada detalle"
-                 data-detalle="es una colección que explora la naturaleza cambiante de las emociones, la identidad y la expresión femenina. A través de contrastes de color, volúmenes y uniones visibles, las prendas representan la transformación constante de la mujer, mostrando que la feminidad no es estática, sino un equilibrio entre fuerza, vulnerabilidad y evolución.."
-                 data-piezas="18 piezas"
-                 data-tela="Seda cruda y crepé italiano"
-                 data-imagen="imagen-coleccion-2"
-                 data-imagen-src="fto/segundo.jpeg">
-              <img class="imagen-tarjeta" src="fto/segundo.jpeg" alt="Volatidad">
-              <div class="capa-hover-tarjeta">
-                <div class="informacion-tarjeta">
-                  <p class="categoria-tarjeta">Colección Formal</p>
-                  <h3 class="nombre-tarjeta">Volatidad</h3>
-                  <p class="descripcion-tarjeta">Sofisticación en cada detalle</p>
-                  <span class="ver-mas-tarjeta">Ver detalles +</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-carrusel">
-            <div class="tarjeta-coleccion" tabindex="0"
-                 data-titulo="Voces silenciadas"
-                 data-categoria="Edición Limitada"
-                 data-descripcion="Para quien se atreve a brillar"
-                 data-detalle="“Voces Silenciadas” es una colección que representa las emociones, historias y experiencias que muchas mujeres han callado. A través de transparencias, estructuras y contrastes, cada prenda simboliza la lucha entre el silencio impuesto y el deseo de ser escuchadas, transformando la moda en una forma de expresión y resistencia.."
-                 data-piezas="8 piezas únicas"
-                 data-tela="Tafetán de seda y pedrería"
-                 data-imagen="imagen-coleccion-3"
-                 data-imagen-src="fto/tercero.jpeg">
-              <img class="imagen-tarjeta" src="fto/tercero.jpeg" alt="Voces silenciadas">
-              <div class="capa-hover-tarjeta">
-                <div class="informacion-tarjeta">
-                  <p class="categoria-tarjeta">Edición Limitada</p>
-                  <h3 class="nombre-tarjeta">Voces Silenciadas</h3>
-                  <p class="descripcion-tarjeta">Para quien se atreve a brillar</p>
-                  <span class="ver-mas-tarjeta">Ver detalles +</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-        </div>
+      <div class="carousel-indicators puntos-carrusel" id="puntos-carrusel">
+        <button type="button" data-bs-target="#carruselColecciones" data-bs-slide-to="0" class="active punto-carrusel" aria-current="true" aria-label="Ir a la tarjeta 1"></button>
+        <button type="button" data-bs-target="#carruselColecciones" data-bs-slide-to="1" class="punto-carrusel" aria-label="Ir a la tarjeta 2"></button>
+        <button type="button" data-bs-target="#carruselColecciones" data-bs-slide-to="2" class="punto-carrusel" aria-label="Ir a la tarjeta 3"></button>
       </div>
 
-      <button type="button" class="flecha-carrusel flecha-siguiente" id="flecha-siguiente" aria-label="Siguiente">
+      <div class="carousel-inner">
+
+        <div class="carousel-item active">
+          <div class="card tarjeta-coleccion mx-auto" tabindex="0"
+               data-titulo="Llanto de una gargola"
+               data-categoria="Colección Nocturna"
+               data-descripcion="Elegancia que trasciende la noche"
+               data-detalle="“El llanto de una gárgola” representa la dualidad entre fortaleza y vulnerabilidad. A través de estructuras rígidas, texturas ásperas y tonos oscuros, la pieza simboliza el dolor oculto de quienes permanecen fuertes mientras guardan en silencio sus emociones.."
+               data-piezas="14 piezas"
+               data-tela="Seda, terciopelo y encaje francés"
+               data-imagen="imagen-coleccion-1"
+               data-imagen-src="fto/primero.jpeg">
+            <img class="card-img-top imagen-tarjeta" src="fto/primero.jpeg" alt="Rouge Minuit">
+            <span class="badge insignia-destacado">Destacado</span>
+            <div class="card-body capa-hover-tarjeta">
+              <div class="informacion-tarjeta">
+                <p class="categoria-tarjeta">Colección Nocturna</p>
+                <h3 class="card-title nombre-tarjeta">Llanto De Una Gargola</h3>
+                <p class="card-text descripcion-tarjeta">Elegancia que trasciende la noche</p>
+                <span class="ver-mas-tarjeta">Ver detalles +</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="carousel-item">
+          <div class="card tarjeta-coleccion mx-auto" tabindex="0"
+               data-titulo="Volatidad"
+               data-categoria="Colección Formal"
+               data-descripcion="Sofisticación en cada detalle"
+               data-detalle="es una colección que explora la naturaleza cambiante de las emociones, la identidad y la expresión femenina. A través de contrastes de color, volúmenes y uniones visibles, las prendas representan la transformación constante de la mujer, mostrando que la feminidad no es estática, sino un equilibrio entre fuerza, vulnerabilidad y evolución.."
+               data-piezas="18 piezas"
+               data-tela="Seda cruda y crepé italiano"
+               data-imagen="imagen-coleccion-2"
+               data-imagen-src="fto/segundo.jpeg">
+            <img class="card-img-top imagen-tarjeta" src="fto/segundo.jpeg" alt="Volatidad">
+            <div class="card-body capa-hover-tarjeta">
+              <div class="informacion-tarjeta">
+                <p class="categoria-tarjeta">Colección Formal</p>
+                <h3 class="card-title nombre-tarjeta">Volatidad</h3>
+                <p class="card-text descripcion-tarjeta">Sofisticación en cada detalle</p>
+                <span class="ver-mas-tarjeta">Ver detalles +</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="carousel-item">
+          <div class="card tarjeta-coleccion mx-auto" tabindex="0"
+               data-titulo="Voces silenciadas"
+               data-categoria="Edición Limitada"
+               data-descripcion="Para quien se atreve a brillar"
+               data-detalle="“Voces Silenciadas” es una colección que representa las emociones, historias y experiencias que muchas mujeres han callado. A través de transparencias, estructuras y contrastes, cada prenda simboliza la lucha entre el silencio impuesto y el deseo de ser escuchadas, transformando la moda en una forma de expresión y resistencia.."
+               data-piezas="8 piezas únicas"
+               data-tela="Tafetán de seda y pedrería"
+               data-imagen="imagen-coleccion-3"
+               data-imagen-src="fto/tercero.jpeg">
+            <img class="card-img-top imagen-tarjeta" src="fto/tercero.jpeg" alt="Voces silenciadas">
+            <div class="card-body capa-hover-tarjeta">
+              <div class="informacion-tarjeta">
+                <p class="categoria-tarjeta">Edición Limitada</p>
+                <h3 class="card-title nombre-tarjeta">Voces Silenciadas</h3>
+                <p class="card-text descripcion-tarjeta">Para quien se atreve a brillar</p>
+                <span class="ver-mas-tarjeta">Ver detalles +</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <button class="carousel-control-prev flecha-carrusel flecha-anterior" type="button" data-bs-target="#carruselColecciones" data-bs-slide="prev">
+        <svg viewBox="0 0 24 24"><path d="M15.5 3.5 6 12l9.5 8.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span class="visually-hidden">Anterior</span>
+      </button>
+      <button class="carousel-control-next flecha-carrusel flecha-siguiente" type="button" data-bs-target="#carruselColecciones" data-bs-slide="next">
         <svg viewBox="0 0 24 24"><path d="m8.5 3.5 9.5 8.5-9.5 8.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span class="visually-hidden">Siguiente</span>
       </button>
 
     </div>
-
-    <div class="puntos-carrusel" id="puntos-carrusel"></div>
 
   </div>
 </section>
@@ -221,7 +224,7 @@
           </div>
         </div>
 
-        <a href="#contacto" class="boton-agendar-cita d-inline-block text-decoration-none">Agendar una cita</a>
+        <a href="#contacto" class="btn boton-agendar-cita d-inline-block text-decoration-none">Agendar una cita</a>
       </div>
 
     </div>
@@ -274,7 +277,7 @@
 
         </div>
 
-        <button type="submit" class="boton-enviar-mensaje btn w-100 py-3 mt-2 elemento-revelado retraso-2">Enviar Mensaje</button>
+        <button type="submit" class="btn boton-enviar-mensaje w-100 py-3 mt-2 elemento-revelado retraso-2">Enviar Mensaje</button>
 
         <p class="mensaje-estado-formulario mt-3 mb-0 text-center" id="mensaje-estado-formulario"></p>
       </form>
@@ -339,33 +342,33 @@
 
 </footer>
 
-<!-- modal de detalle de colección -->
-<div class="overlay-modal" id="overlay-modal">
-  <div class="tarjeta-modal">
-    <button type="button" class="cerrar-modal" id="cerrar-modal" aria-label="Cerrar">
-      <svg viewBox="0 0 24 24"><path d="M4 4l16 16M20 4 4 20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
-    </button>
+<!-- modal de detalle de colección (Bootstrap modal real) -->
+<div class="modal fade" id="modalColeccion" tabindex="-1" aria-labelledby="titulo-modal" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content tarjeta-modal">
+      <button type="button" class="btn-close cerrar-modal" id="cerrar-modal" data-bs-dismiss="modal" aria-label="Cerrar"></button>
 
-    <div class="imagen-modal" id="imagen-modal"></div>
+      <div class="imagen-modal" id="imagen-modal"></div>
 
-    <div class="contenido-modal">
-      <p class="categoria-modal" id="categoria-modal"></p>
-      <h3 class="titulo-modal" id="titulo-modal"></h3>
-      <div class="divisor-rojo ms-0"></div>
-      <p class="descripcion-modal" id="descripcion-modal"></p>
+      <div class="modal-body contenido-modal">
+        <p class="categoria-modal" id="categoria-modal"></p>
+        <h3 class="modal-title titulo-modal" id="titulo-modal"></h3>
+        <div class="divisor-rojo ms-0"></div>
+        <p class="descripcion-modal" id="descripcion-modal"></p>
 
-      <div class="detalles-modal">
-        <div>
-          <p class="etiqueta-detalle-modal">Piezas</p>
-          <p class="valor-detalle-modal" id="piezas-modal"></p>
+        <div class="detalles-modal">
+          <div>
+            <p class="etiqueta-detalle-modal">Piezas</p>
+            <p class="valor-detalle-modal" id="piezas-modal"></p>
+          </div>
+          <div>
+            <p class="etiqueta-detalle-modal">Materiales</p>
+            <p class="valor-detalle-modal" id="tela-modal"></p>
+          </div>
         </div>
-        <div>
-          <p class="etiqueta-detalle-modal">Materiales</p>
-          <p class="valor-detalle-modal" id="tela-modal"></p>
-        </div>
+
+        <a href="#contacto" data-bs-dismiss="modal" class="btn boton-agendar-cita d-inline-block text-decoration-none" id="cita-modal">Agendar una cita</a>
       </div>
-
-      <a href="#contacto" class="boton-agendar-cita d-inline-block text-decoration-none" id="cita-modal">Agendar una cita</a>
     </div>
   </div>
 </div>

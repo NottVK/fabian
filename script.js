@@ -58,97 +58,23 @@ document.querySelectorAll('.elemento-revelado').forEach(function(elemento) {
   observadorScroll.observe(elemento);
 });
 
-/* carrusel de colecciones */
-const pistaCarrusel     = document.getElementById('pista-carrusel');
-const flechaAnterior    = document.getElementById('flecha-anterior');
-const flechaSiguiente   = document.getElementById('flecha-siguiente');
-const contenedorPuntos  = document.getElementById('puntos-carrusel');
-const columnasCarrusel  = pistaCarrusel ? Array.from(pistaCarrusel.children) : [];
+/* carrusel de colecciones: ahora es el componente carousel nativo de
+   Bootstrap (indicadores, controles y transición de slides los maneja
+   Bootstrap solo). Aquí solo activamos el cursor personalizado en los
+   indicadores y guardamos la lista de tarjetas para la búsqueda. */
+const carruselBootstrapEl = document.getElementById('carruselColecciones');
+const contenedorPuntos    = document.getElementById('puntos-carrusel');
+const tarjetasCarrusel    = carruselBootstrapEl
+  ? Array.from(carruselBootstrapEl.querySelectorAll('.carousel-item'))
+  : [];
 
-let indiceActual = 0;
-let porVista = 3;
-
-function calcularPorVista() {
-  const ancho = window.innerWidth;
-  if (ancho <= 640) return 1;
-  if (ancho <= 991) return 2;
-  return 3;
+if (contenedorPuntos) {
+  Array.from(contenedorPuntos.children).forEach(activarCursorHover);
 }
 
-function totalPaginas() {
-  return Math.max(1, columnasCarrusel.length - porVista + 1);
-}
-
-function construirPuntos() {
-  if (!contenedorPuntos) return;
-  contenedorPuntos.innerHTML = '';
-  const paginas = totalPaginas();
-  for (let i = 0; i < paginas; i++) {
-    const punto = document.createElement('button');
-    punto.type = 'button';
-    punto.className = 'punto-carrusel' + (i === indiceActual ? ' activo' : '');
-    punto.setAttribute('aria-label', 'Ir a la tarjeta ' + (i + 1));
-    punto.addEventListener('click', function() {
-      indiceActual = i;
-      actualizarCarrusel();
-    });
-    activarCursorHover(punto);
-    contenedorPuntos.appendChild(punto);
-  }
-}
-
-function actualizarCarrusel() {
-  if (!pistaCarrusel || columnasCarrusel.length === 0) return;
-
-  porVista = calcularPorVista();
-  const maxIndice = totalPaginas() - 1;
-  if (indiceActual > maxIndice) indiceActual = maxIndice;
-  if (indiceActual < 0) indiceActual = 0;
-
-  const anchoColumna = columnasCarrusel[0].getBoundingClientRect().width;
-  const estiloComputado = getComputedStyle(pistaCarrusel);
-  const espacio = parseFloat(estiloComputado.gap) || 0;
-  const desplazamiento = indiceActual * (anchoColumna + espacio);
-
-  pistaCarrusel.style.transform = 'translateX(-' + desplazamiento + 'px)';
-
-  if (flechaAnterior) flechaAnterior.disabled = indiceActual === 0;
-  if (flechaSiguiente) flechaSiguiente.disabled = indiceActual >= maxIndice;
-
-  if (contenedorPuntos) {
-    Array.from(contenedorPuntos.children).forEach(function(punto, i) {
-      punto.classList.toggle('activo', i === indiceActual);
-    });
-  }
-}
-
-if (flechaSiguiente) {
-  flechaSiguiente.addEventListener('click', function() {
-    indiceActual++;
-    actualizarCarrusel();
-  });
-}
-
-if (flechaAnterior) {
-  flechaAnterior.addEventListener('click', function() {
-    indiceActual--;
-    actualizarCarrusel();
-  });
-}
-
-window.addEventListener('resize', function() {
-  construirPuntos();
-  actualizarCarrusel();
-});
-
-if (pistaCarrusel) {
-  construirPuntos();
-  actualizarCarrusel();
-}
-
-/* modal de detalle de colección */
-const overlayModal      = document.getElementById('overlay-modal');
-const cerrarModalBoton   = document.getElementById('cerrar-modal');
+/* modal de detalle de colección (ahora es un modal nativo de Bootstrap) */
+const modalColeccionEl  = document.getElementById('modalColeccion');
+const modalColeccion     = modalColeccionEl ? new bootstrap.Modal(modalColeccionEl) : null;
 const imagenModal        = document.getElementById('imagen-modal');
 const categoriaModal     = document.getElementById('categoria-modal');
 const tituloModal        = document.getElementById('titulo-modal');
@@ -167,13 +93,7 @@ function abrirModal(tarjeta) {
   piezasModal.textContent      = datos.piezas || '—';
   telaModal.textContent        = datos.tela || '—';
 
-  overlayModal.classList.add('activo');
-  document.body.style.overflow = 'hidden';
-}
-
-function cerrarModal() {
-  overlayModal.classList.remove('activo');
-  document.body.style.overflow = '';
+  if (modalColeccion) modalColeccion.show();
 }
 
 document.querySelectorAll('.tarjeta-coleccion').forEach(function(tarjeta) {
@@ -186,18 +106,6 @@ document.querySelectorAll('.tarjeta-coleccion').forEach(function(tarjeta) {
       abrirModal(tarjeta);
     }
   });
-});
-
-if (cerrarModalBoton) cerrarModalBoton.addEventListener('click', cerrarModal);
-
-if (overlayModal) {
-  overlayModal.addEventListener('click', function(e) {
-    if (e.target === overlayModal) cerrarModal();
-  });
-}
-
-document.addEventListener('keydown', function(e) {
-  if (e.key === 'Escape') cerrarModal();
 });
 
 /* menú móvil */
@@ -304,26 +212,26 @@ if (formularioBuscador) {
 
     if (!consulta) return;
 
-    const tarjetaEncontrada = columnasCarrusel
-      .map(function(col) { return col.querySelector('.tarjeta-coleccion'); })
-      .find(function(tarjeta) {
-        const datos = tarjeta.dataset;
-        return normalizarTexto(datos.titulo).includes(consulta) ||
-               normalizarTexto(datos.categoria).includes(consulta) ||
-               normalizarTexto(datos.descripcion).includes(consulta);
-      });
+    const tarjetaEncontrada = document.querySelector('.tarjeta-coleccion')
+      ? Array.from(document.querySelectorAll('.tarjeta-coleccion')).find(function(tarjeta) {
+          const datos = tarjeta.dataset;
+          return normalizarTexto(datos.titulo).includes(consulta) ||
+                 normalizarTexto(datos.categoria).includes(consulta) ||
+                 normalizarTexto(datos.descripcion).includes(consulta);
+        })
+      : null;
 
     if (tarjetaEncontrada) {
-      const indiceEncontrado = columnasCarrusel.findIndex(function(col) {
-        return col.contains(tarjetaEncontrada);
-      });
+      const itemPadre = tarjetaEncontrada.closest('.carousel-item');
+      const indiceEncontrado = tarjetasCarrusel.indexOf(itemPadre);
 
       cerrarMenuMovil();
       document.getElementById('colecciones').scrollIntoView({ behavior: 'smooth', block: 'start' });
 
-      const maxIndice = totalPaginas() - 1;
-      indiceActual = Math.min(indiceEncontrado, maxIndice);
-      actualizarCarrusel();
+      if (carruselBootstrapEl && indiceEncontrado > -1) {
+        const instanciaCarrusel = bootstrap.Carousel.getOrCreateInstance(carruselBootstrapEl);
+        instanciaCarrusel.to(indiceEncontrado);
+      }
 
       setTimeout(function() { abrirModal(tarjetaEncontrada); }, 550);
     } else {

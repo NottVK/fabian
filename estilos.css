@@ -257,6 +257,7 @@ body {
   justify-content: center;
   cursor: none;
   transition: background 0.3s;
+  padding: 0;
 }
 
 .boton-buscador svg { width: 15px; height: 15px; }
@@ -348,6 +349,7 @@ body {
   color: var(--color-crema);
   padding: 1.1rem 3.2rem;
   border: 1px solid var(--color-crimson);
+  border-radius: 0;
   position: relative;
   overflow: hidden;
   opacity: 0;
@@ -416,49 +418,35 @@ body {
   color: var(--color-opaco);
 }
 
-/* colecciones: carrusel */
+/* colecciones: carrusel de Bootstrap */
 .seccion-colecciones { padding: 8rem 0; background: var(--color-negro-2); }
 
 .carrusel-colecciones {
   position: relative;
-  display: flex;
-  align-items: center;
-  gap: 1.2rem;
-  padding: 0 clamp(0.5rem, 4vw, 3rem);
+  padding: 0 clamp(3rem, 8vw, 6rem);
 }
 
-.viewport-carrusel {
-  flex: 1;
-  overflow: hidden;
+.carrusel-colecciones .carousel-inner {
+  overflow: visible;
 }
 
-.pista-carrusel {
-  display: flex;
-  gap: 1.6rem;
-  transition: transform 0.65s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.col-carrusel {
-  flex: 0 0 calc(33.333% - 1.07rem);
-  min-width: 0;
-}
-
-@media (max-width: 991px) {
-  .col-carrusel { flex-basis: calc(50% - 0.8rem); }
-}
-
-@media (max-width: 640px) {
-  .col-carrusel { flex-basis: 100%; }
-  .carrusel-colecciones { padding: 0 0.25rem; }
+/* la tarjeta ocupa el centro del slide, con un ancho máximo elegante */
+.carrusel-colecciones .tarjeta-coleccion.card {
+  max-width: 420px;
 }
 
 .flecha-carrusel {
-  flex: 0 0 auto;
+  /* neutralizamos el posicionamiento por defecto de Bootstrap para
+     mantener nuestros botones circulares junto al carrusel */
+  position: absolute;
+  top: 50%;
+  translate: 0 -50%;
+  opacity: 1;
   width: 46px;
   height: 46px;
   border-radius: 50%;
   border: 1px solid rgba(247, 240, 238, 0.18);
-  background: transparent;
+  background-color: transparent;
   color: var(--color-crema);
   display: flex;
   align-items: center;
@@ -468,36 +456,49 @@ body {
   z-index: 2;
 }
 
-.flecha-carrusel svg { width: 16px; height: 16px; }
-.flecha-carrusel:hover { border-color: var(--color-crimson); background: rgba(196, 30, 58, 0.1); color: var(--color-crimson); }
-.flecha-carrusel:disabled { opacity: 0.25; pointer-events: none; }
+.flecha-anterior { left: 0; }
+.flecha-siguiente { right: 0; }
 
-.puntos-carrusel {
-  display: flex;
-  justify-content: center;
+.flecha-carrusel svg { width: 16px; height: 16px; }
+.flecha-carrusel:hover,
+.flecha-carrusel:focus { border-color: var(--color-crimson); background-color: rgba(196, 30, 58, 0.1); color: var(--color-crimson); opacity: 1; }
+
+.puntos-carrusel.carousel-indicators {
+  position: static;
+  margin: 2.6rem 0 0;
   gap: 0.6rem;
-  margin-top: 2.6rem;
 }
 
 .punto-carrusel {
-  width: 7px;
-  height: 7px;
+  width: 7px !important;
+  height: 7px !important;
   border-radius: 50%;
-  background: rgba(247, 240, 238, 0.18);
-  border: none;
+  background-color: rgba(247, 240, 238, 0.18) !important;
+  border: none !important;
+  opacity: 1 !important;
   cursor: none;
   transition: all 0.3s;
   padding: 0;
+  text-indent: -9999px;
 }
 
-.punto-carrusel.activo { background: var(--color-crimson); width: 22px; border-radius: 4px; }
+.punto-carrusel.active { background-color: var(--color-crimson) !important; width: 22px !important; border-radius: 4px; }
 
-/* colecciones: tarjetas */
-.tarjeta-coleccion { position: relative; overflow: hidden; aspect-ratio: 3 / 4; cursor: none; }
+/* colecciones: tarjetas (Bootstrap .card + estilo propio) */
+.tarjeta-coleccion.card {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 3 / 4;
+  cursor: none;
+  background-color: transparent;
+  border: none;
+  border-radius: 0;
+}
 
 .imagen-tarjeta {
   width: 100%;
   height: 100%;
+  object-fit: cover;
   transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -512,7 +513,7 @@ body {
 .imagen-coleccion-2 { background: linear-gradient(210deg, #200a12 0%, #7A1228 48%, #0A0306 100%); }
 .imagen-coleccion-3 { background: linear-gradient(130deg, #0A0306 0%, #4a0b18 55%, #180710 100%); }
 
-.capa-hover-tarjeta {
+.capa-hover-tarjeta.card-body {
   position: absolute;
   inset: 0;
   background: linear-gradient(to top, rgba(10, 3, 6, 0.96) 0%, rgba(92, 13, 28, 0.25) 55%, transparent 100%);
@@ -525,21 +526,22 @@ body {
 
 .informacion-tarjeta { transform: translateY(0.8rem); transition: transform 0.5s; }
 .categoria-tarjeta { font-size: 0.52rem; letter-spacing: 0.45em; text-transform: uppercase; color: var(--color-crimson); margin-bottom: 0.4rem; }
-.nombre-tarjeta { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 700; color: var(--color-crema); margin-bottom: 0.4rem; }
-.descripcion-tarjeta { font-size: 0.68rem; font-weight: 300; color: var(--color-crema-2); letter-spacing: 0.05em; opacity: 0.85; }
+.nombre-tarjeta.card-title { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 700; color: var(--color-crema); margin-bottom: 0.4rem; }
+.descripcion-tarjeta.card-text { font-size: 0.68rem; font-weight: 300; color: var(--color-crema-2); letter-spacing: 0.05em; opacity: 0.85; }
 .ver-mas-tarjeta { display: inline-block; margin-top: 0.9rem; font-size: 0.55rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--color-crema); opacity: 0.7; border-bottom: 1px solid rgba(247, 240, 238, 0.35); padding-bottom: 2px; transition: opacity 0.3s, border-color 0.3s; }
 
-.insignia-destacado {
+.insignia-destacado.badge {
   position: absolute;
   top: 1.5rem;
   right: 1.5rem;
-  background: var(--color-crimson);
+  background-color: var(--color-crimson);
   font-size: 0.5rem;
   letter-spacing: 0.22em;
   text-transform: uppercase;
   padding: 0.42rem 0.9rem;
   font-weight: 500;
   color: var(--color-crema);
+  border-radius: 0;
 }
 
 .tarjeta-coleccion:hover .imagen-tarjeta { transform: scale(1.06); }
@@ -548,44 +550,25 @@ body {
 .tarjeta-coleccion:hover .ver-mas-tarjeta { opacity: 1; border-color: var(--color-crimson); }
 .tarjeta-coleccion:focus-visible { outline: 1px solid var(--color-crimson); outline-offset: 4px; }
 
-/* modal de detalle */
-.overlay-modal {
-  position: fixed;
-  inset: 0;
-  z-index: 10000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 2rem;
-  background: rgba(10, 3, 6, 0.86);
-  backdrop-filter: blur(10px);
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.4s ease, visibility 0.4s ease;
-}
+/* modal de detalle (Bootstrap .modal) */
+.modal-backdrop.show { opacity: 0.86; background-color: var(--color-negro); backdrop-filter: blur(10px); }
 
-.overlay-modal.activo { opacity: 1; visibility: visible; }
+#modalColeccion .modal-dialog { max-width: 860px; }
 
-.tarjeta-modal {
+.tarjeta-modal.modal-content {
   position: relative;
-  width: 100%;
-  max-width: 860px;
   max-height: 88vh;
   overflow-y: auto;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  background: var(--color-negro-2);
+  background-color: var(--color-negro-2);
   border: 1px solid rgba(92, 13, 28, 0.4);
+  border-radius: 0;
   box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
-  transform: translateY(24px) scale(0.98);
-  opacity: 0;
-  transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.45s ease;
 }
 
-.overlay-modal.activo .tarjeta-modal { transform: translateY(0) scale(1); opacity: 1; }
-
 @media (max-width: 767px) {
-  .tarjeta-modal { grid-template-columns: 1fr; max-height: 92vh; }
+  .tarjeta-modal.modal-content { grid-template-columns: 1fr; max-height: 92vh; }
 }
 
 .imagen-modal {
@@ -603,17 +586,17 @@ body {
   background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='600'%3E%3Cellipse cx='200' cy='280' rx='100' ry='180' fill='none' stroke='rgba(247,240,238,0.05)' stroke-width='1'/%3E%3Cellipse cx='200' cy='280' rx='60' ry='120' fill='none' stroke='rgba(196,30,58,0.07)' stroke-width='.5'/%3E%3C/svg%3E") center / cover;
 }
 
-.contenido-modal { padding: 3rem 2.6rem; }
+.contenido-modal.modal-body { padding: 3rem 2.6rem; }
 
 .categoria-modal { font-size: 0.55rem; letter-spacing: 0.42em; text-transform: uppercase; color: var(--color-crimson); margin-bottom: 0.8rem; }
-.titulo-modal { font-family: 'Playfair Display', serif; font-size: clamp(1.6rem, 3vw, 2.3rem); font-weight: 700; color: var(--color-crema); }
+.titulo-modal.modal-title { font-family: 'Playfair Display', serif; font-size: clamp(1.6rem, 3vw, 2.3rem); font-weight: 700; color: var(--color-crema); }
 .descripcion-modal { font-size: 0.85rem; font-weight: 300; line-height: 1.85; color: var(--color-opaco); margin: 1.6rem 0 2rem; }
 
 .detalles-modal { display: flex; gap: 2.4rem; margin-bottom: 2.4rem; }
 .etiqueta-detalle-modal { font-size: 0.52rem; letter-spacing: 0.32em; text-transform: uppercase; color: var(--color-crimson); margin-bottom: 0.4rem; }
 .valor-detalle-modal { font-size: 0.8rem; font-weight: 300; color: var(--color-crema); }
 
-.cerrar-modal {
+.cerrar-modal.btn-close {
   position: absolute;
   top: 1.2rem;
   right: 1.2rem;
@@ -621,18 +604,15 @@ body {
   height: 38px;
   border-radius: 50%;
   border: 1px solid rgba(247, 240, 238, 0.2);
-  background: rgba(10, 3, 6, 0.5);
-  color: var(--color-crema);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: none;
+  background-color: rgba(10, 3, 6, 0.5);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M4 4l16 16M20 4 4 20' fill='none' stroke='%23F7F0EE' stroke-width='1.4' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-size: 14px 14px;
+  opacity: 1;
   z-index: 2;
   transition: all 0.3s;
 }
 
-.cerrar-modal svg { width: 14px; height: 14px; }
-.cerrar-modal:hover { border-color: var(--color-crimson); color: var(--color-crimson); }
+.cerrar-modal.btn-close:hover { border-color: var(--color-crimson); opacity: 1; }
 
 /* sección de la diseñadora */
 .seccion-disenadora { padding: 8rem 0; background: var(--color-negro); }
@@ -688,11 +668,13 @@ body {
   color: var(--color-crema);
   padding: 0.95rem 2.6rem;
   border: 1px solid rgba(247, 240, 238, 0.18);
+  border-radius: 0;
+  background-color: transparent;
   transition: all 0.3s;
   cursor: none;
 }
 
-.boton-agendar-cita:hover { border-color: var(--color-crimson); background: rgba(196, 30, 58, 0.08); color: var(--color-crema); }
+.boton-agendar-cita:hover { border-color: var(--color-crimson); background-color: rgba(196, 30, 58, 0.08); color: var(--color-crema); }
 
 /* sección de contacto */
 .seccion-contacto { padding: 8rem 0; background: var(--color-negro-2); }
@@ -718,9 +700,10 @@ body {
 .campo-texto::placeholder { color: rgba(247, 240, 238, 0.18) !important; font-style: italic; }
 
 .boton-enviar-mensaje {
-  background: var(--color-crimson);
+  background-color: var(--color-crimson);
   color: var(--color-crema);
   border: none;
+  border-radius: 0;
   font-family: 'Montserrat', sans-serif;
   font-size: 0.68rem;
   font-weight: 500;
@@ -728,10 +711,9 @@ body {
   text-transform: uppercase;
   cursor: none;
   transition: background 0.3s;
-  border-radius: 0;
 }
 
-.boton-enviar-mensaje:hover { background: var(--color-vino-claro); color: var(--color-crema); }
+.boton-enviar-mensaje:hover { background-color: var(--color-vino-claro); color: var(--color-crema); }
 .boton-enviar-mensaje:disabled { opacity: 0.6; cursor: none; }
 
 .mensaje-estado-formulario { font-size: 0.78rem; font-weight: 300; min-height: 1.2em; }
@@ -791,6 +773,11 @@ body {
   .linea-decorativa-izquierda, .linea-decorativa-derecha { display: none; }
 }
 
+@media (max-width: 640px) {
+  .carrusel-colecciones { padding: 0 3.2rem; }
+  .carrusel-colecciones .tarjeta-coleccion.card { aspect-ratio: 4 / 5; max-width: 100%; }
+}
+
 @media (max-width: 480px) {
   .barra-navegacion { padding: 1.1rem 1.3rem; }
   .barra-navegacion.con-fondo { padding: 0.8rem 1.3rem; }
@@ -810,16 +797,15 @@ body {
 
   .seccion-colecciones, .seccion-disenadora, .seccion-contacto { padding: 5rem 0; }
 
-  .carrusel-colecciones { gap: 0.6rem; }
+  .carrusel-colecciones { padding: 0 2.6rem; }
   .flecha-carrusel { width: 38px; height: 38px; }
   .flecha-carrusel svg { width: 13px; height: 13px; }
 
-  .tarjeta-coleccion { aspect-ratio: 4 / 5; }
+  .tarjeta-coleccion.card { aspect-ratio: 4 / 5; }
   .capa-hover-tarjeta { padding: 1.4rem; }
   .nombre-tarjeta { font-size: 1.15rem; }
 
-  .tarjeta-modal { border-left: none; border-right: none; }
-  .contenido-modal { padding: 2.2rem 1.5rem; }
+  .contenido-modal.modal-body { padding: 2.2rem 1.5rem; }
   .imagen-modal { min-height: 200px; }
   .detalles-modal { gap: 1.6rem; }
 
