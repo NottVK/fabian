@@ -160,6 +160,7 @@ function abrirModal(tarjeta) {
   const datos = tarjeta.dataset;
 
   imagenModal.className = 'imagen-modal ' + (datos.imagen || '');
+  imagenModal.style.backgroundImage = datos.imagenSrc ? 'url(' + datos.imagenSrc + ')' : '';
   categoriaModal.textContent   = datos.categoria || '';
   tituloModal.textContent      = datos.titulo || '';
   descripcionModal.textContent = datos.detalle || datos.descripcion || '';

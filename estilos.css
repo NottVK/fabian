@@ -591,6 +591,9 @@ body {
 .imagen-modal {
   position: relative;
   min-height: 260px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .imagen-modal::after {
