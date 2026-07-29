@@ -1,4 +1,4 @@
-// Cursor personalizado que sigue al puntero del mouse
+/* cursor personalizado */
 const cursoPunto  = document.getElementById('cursor-punto');
 const cursoAnillo = document.getElementById('cursor-anillo');
 let ratonX = 0, ratonY = 0, anilloX = 0, anilloY = 0;
@@ -35,7 +35,7 @@ function activarCursorHover(elemento) {
 
 document.querySelectorAll('a, button, .tarjeta-coleccion').forEach(activarCursorHover);
 
-// Le agrega fondo a la barra de navegación al hacer scroll
+/* navbar con fondo al hacer scroll */
 const barraPrincipal = document.getElementById('barra-principal');
 window.addEventListener('scroll', function() {
   if (window.scrollY > 80) {
@@ -45,7 +45,7 @@ window.addEventListener('scroll', function() {
   }
 });
 
-// Revela los elementos con la clase .elemento-revelado al hacer scroll
+/* revelado de elementos al hacer scroll */
 const observadorScroll = new IntersectionObserver(function(entradas) {
   entradas.forEach(function(entrada) {
     if (entrada.isIntersecting) {
@@ -58,7 +58,7 @@ document.querySelectorAll('.elemento-revelado').forEach(function(elemento) {
   observadorScroll.observe(elemento);
 });
 
-// ===== Carrusel de colecciones =====
+/* carrusel de colecciones */
 const pistaCarrusel     = document.getElementById('pista-carrusel');
 const flechaAnterior    = document.getElementById('flecha-anterior');
 const flechaSiguiente   = document.getElementById('flecha-siguiente');
@@ -146,7 +146,7 @@ if (pistaCarrusel) {
   actualizarCarrusel();
 }
 
-// ===== Modal de detalle de colección =====
+/* modal de detalle de colección */
 const overlayModal      = document.getElementById('overlay-modal');
 const cerrarModalBoton   = document.getElementById('cerrar-modal');
 const imagenModal        = document.getElementById('imagen-modal');
@@ -199,7 +199,7 @@ document.addEventListener('keydown', function(e) {
   if (e.key === 'Escape') cerrarModal();
 });
 
-// ===== Menú móvil (hamburguesa) =====
+/* menú móvil */
 const botonHamburguesa = document.getElementById('boton-hamburguesa');
 const overlayMenuMovil = document.getElementById('overlay-menu-movil');
 const cerrarMenuMovilBoton = document.getElementById('cerrar-menu-movil');
@@ -241,7 +241,50 @@ document.addEventListener('keydown', function(e) {
   }
 });
 
-// ===== Buscador del hero =====
+/* formulario de contacto */
+const formularioContacto = document.getElementById('formulario-contacto');
+const mensajeEstadoFormulario = document.getElementById('mensaje-estado-formulario');
+
+if (formularioContacto) {
+  formularioContacto.addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const botonEnviar = formularioContacto.querySelector('.boton-enviar-mensaje');
+    const datos = new FormData(formularioContacto);
+
+    botonEnviar.disabled = true;
+    botonEnviar.textContent = 'Enviando...';
+    mensajeEstadoFormulario.textContent = '';
+    mensajeEstadoFormulario.className = 'mensaje-estado-formulario mt-3 mb-0 text-center';
+
+    fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: { 'Accept': 'application/json' },
+      body: datos
+    })
+      .then(function(respuesta) { return respuesta.json(); })
+      .then(function(resultado) {
+        if (resultado.success) {
+          formularioContacto.reset();
+          mensajeEstadoFormulario.textContent = 'Mensaje enviado. Te contactaremos pronto.';
+          mensajeEstadoFormulario.classList.add('exito');
+        } else {
+          mensajeEstadoFormulario.textContent = 'No se pudo enviar el mensaje. Intenta de nuevo.';
+          mensajeEstadoFormulario.classList.add('error');
+        }
+      })
+      .catch(function() {
+        mensajeEstadoFormulario.textContent = 'Error de conexión. Intenta de nuevo.';
+        mensajeEstadoFormulario.classList.add('error');
+      })
+      .finally(function() {
+        botonEnviar.disabled = false;
+        botonEnviar.textContent = 'Enviar Mensaje';
+      });
+  });
+}
+
+/* buscador del hero */
 const formularioBuscador = document.getElementById('formulario-buscador');
 const campoBuscador = document.getElementById('campo-buscador');
 

@@ -1,20 +1,18 @@
-/* Paleta de colores y variables */
+/* variables */
 :root {
   --color-negro:       #0A0306;
   --color-negro-2:     #140709;
-  --color-vino:        #5C0D1C;
   --color-vino-claro:  #7A1228;
   --color-crimson:     #B01830;
-  --color-rojo:        #C41E3A;
   --color-crema:       #F7F0EE;
   --color-crema-2:     #E8DCDA;
   --color-opaco:       rgba(247, 240, 238, 0.42);
 }
 
-/* Base general del sitio */
+/* base */
 html {
   scroll-behavior: smooth;
-  overflow-x: hidden; /* FIX: html es quien realmente controla el scroll en muchos navegadores */
+  overflow-x: hidden;
   width: 100%;
 }
 
@@ -23,11 +21,11 @@ body {
   color: var(--color-crema);
   font-family: 'Montserrat', sans-serif;
   overflow-x: hidden;
-  max-width: 100%; /* FIX */
+  max-width: 100%;
   cursor: none;
 }
 
-/* Cursor personalizado (punto + anillo que sigue al mouse) */
+/* cursor personalizado */
 .cursor-punto {
   position: fixed;
   width: 8px;
@@ -52,7 +50,7 @@ body {
   transition: width 0.2s, height 0.2s, border-color 0.2s;
 }
 
-/* Barra de navegación: se apoya en .navbar y .fixed-top de Bootstrap */
+/* barra de navegación */
 .barra-navegacion {
   transition: all 0.4s;
   padding: 1.6rem 3rem;
@@ -98,7 +96,7 @@ body {
 .enlace-nav:hover { opacity: 1; }
 .enlace-nav:hover::after { width: 100%; }
 
-/* Botón hamburguesa (visible solo en móvil, ver clases d-md-none en el HTML) */
+/* menú móvil */
 .boton-hamburguesa {
   flex-direction: column;
   justify-content: center;
@@ -127,7 +125,6 @@ body {
 .boton-hamburguesa.activo span:nth-child(2) { opacity: 0; }
 .boton-hamburguesa.activo span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
 
-/* Menú móvil a pantalla completa */
 .overlay-menu-movil {
   position: fixed;
   inset: 0;
@@ -208,7 +205,7 @@ body {
   margin-top: 1rem;
 }
 
-/* Buscador del hero */
+/* buscador */
 .buscador-heroe {
   display: flex;
   align-items: center;
@@ -271,7 +268,7 @@ body {
   75% { transform: translateX(6px); }
 }
 
-/* Sección de inicio (hero a pantalla completa) */
+/* sección de inicio */
 .seccion-inicio {
   height: 100vh;
 }
@@ -296,8 +293,8 @@ body {
   transform: translate(-50%, -50%);
   pointer-events: none;
   letter-spacing: 0.05em;
-  max-width: 100vw; /* FIX: evita que la caja del texto empuje el ancho del documento */
-  overflow: hidden; /* FIX */
+  max-width: 100vw;
+  overflow: hidden;
 }
 
 .linea-decorativa-izquierda,
@@ -392,9 +389,7 @@ body {
   animation: pulso-scroll 2s ease-in-out infinite;
 }
 
-/* Sección de colecciones (usa row/col de Bootstrap en vez de grid propio) */
-.seccion-colecciones { padding: 8rem 0; background: var(--color-negro-2); }
-
+/* encabezados de sección (reutilizados en colecciones / contacto) */
 .etiqueta-seccion {
   font-size: 0.58rem;
   font-weight: 400;
@@ -421,7 +416,9 @@ body {
   color: var(--color-opaco);
 }
 
-/* Carrusel de colecciones */
+/* colecciones: carrusel */
+.seccion-colecciones { padding: 8rem 0; background: var(--color-negro-2); }
+
 .carrusel-colecciones {
   position: relative;
   display: flex;
@@ -495,6 +492,7 @@ body {
 
 .punto-carrusel.activo { background: var(--color-crimson); width: 22px; border-radius: 4px; }
 
+/* colecciones: tarjetas */
 .tarjeta-coleccion { position: relative; overflow: hidden; aspect-ratio: 3 / 4; cursor: none; }
 
 .imagen-tarjeta {
@@ -550,7 +548,7 @@ body {
 .tarjeta-coleccion:hover .ver-mas-tarjeta { opacity: 1; border-color: var(--color-crimson); }
 .tarjeta-coleccion:focus-visible { outline: 1px solid var(--color-crimson); outline-offset: 4px; }
 
-/* Modal de detalle de coleccion */
+/* modal de detalle */
 .overlay-modal {
   position: fixed;
   inset: 0;
@@ -633,7 +631,7 @@ body {
 .cerrar-modal svg { width: 14px; height: 14px; }
 .cerrar-modal:hover { border-color: var(--color-crimson); color: var(--color-crimson); }
 
-/* Sección de la diseñadora */
+/* sección de la diseñadora */
 .seccion-disenadora { padding: 8rem 0; background: var(--color-negro); }
 
 .imagen-disenadora {
@@ -643,8 +641,6 @@ body {
   display: block;
   position: relative;
 }
-
-.etiqueta-foto { font-size: 0.55rem; letter-spacing: 0.5em; color: rgba(247, 240, 238, 0.18); font-weight: 300; position: relative; z-index: 1; }
 
 .marco-decorativo {
   position: absolute;
@@ -679,7 +675,6 @@ body {
 
 .biografia-disenadora { font-size: 0.83rem; font-weight: 300; line-height: 1.95; color: var(--color-opaco); margin-bottom: 2.5rem; }
 
-.numero-estadistica { font-family: 'Playfair Display', serif; font-size: 2.6rem; font-weight: 700; color: var(--color-crimson); line-height: 1; }
 .etiqueta-estadistica { font-size: 0.58rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--color-opaco); margin-top: 0.35rem; }
 
 .boton-agendar-cita {
@@ -696,7 +691,7 @@ body {
 
 .boton-agendar-cita:hover { border-color: var(--color-crimson); background: rgba(196, 30, 58, 0.08); color: var(--color-crema); }
 
-/* Sección de contacto (formulario sobre .row/.col de Bootstrap) */
+/* sección de contacto */
 .seccion-contacto { padding: 8rem 0; background: var(--color-negro-2); }
 
 .etiqueta-campo { font-size: 0.58rem; letter-spacing: 0.38em; text-transform: uppercase; color: var(--color-opaco); }
@@ -734,11 +729,16 @@ body {
 }
 
 .boton-enviar-mensaje:hover { background: var(--color-vino-claro); color: var(--color-crema); }
+.boton-enviar-mensaje:disabled { opacity: 0.6; cursor: none; }
+
+.mensaje-estado-formulario { font-size: 0.78rem; font-weight: 300; min-height: 1.2em; }
+.mensaje-estado-formulario.exito { color: #7fbf7f; }
+.mensaje-estado-formulario.error { color: var(--color-crimson); }
 
 .etiqueta-contacto { font-size: 0.53rem; letter-spacing: 0.38em; text-transform: uppercase; color: var(--color-crimson); margin-bottom: 0.5rem; }
 .valor-contacto { font-size: 0.83rem; font-weight: 300; color: var(--color-crema); }
 
-/* Pie de página y redes sociales */
+/* pie de página */
 .pie-pagina { padding: 5.5rem 3rem 3.5rem; background: var(--color-negro); text-align: center; border-top: 1px solid rgba(92, 13, 28, 0.2); }
 .titulo-redes-sociales { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.25rem; color: var(--color-opaco); margin-bottom: 2.8rem; }
 
@@ -773,7 +773,7 @@ body {
 
 .texto-derechos { font-size: 0.58rem; letter-spacing: 0.18em; color: var(--color-opaco); padding-top: 2.2rem; border-top: 1px solid rgba(247, 240, 238, 0.05); }
 
-/* Animaciones */
+/* animaciones y utilidades de scroll-reveal */
 @keyframes aparecer-arriba { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes pulso-scroll { 0%, 100% { opacity: 0.35; } 50% { opacity: 1; } }
 
@@ -782,22 +782,20 @@ body {
 .retraso-1 { transition-delay: 0.10s; }
 .retraso-2 { transition-delay: 0.22s; }
 .retraso-3 { transition-delay: 0.34s; }
-.retraso-4 { transition-delay: 0.46s; }
 
-/* Ajustes responsive puntuales que Bootstrap no cubre */
+/* responsive */
 @media (max-width: 991px) {
   .linea-decorativa-izquierda, .linea-decorativa-derecha { display: none; }
 }
 
-/* Ajustes finos para móviles grandes tipo Samsung Galaxy S23 Ultra (~412px lógicos) */
 @media (max-width: 480px) {
-
   .barra-navegacion { padding: 1.1rem 1.3rem; }
   .barra-navegacion.con-fondo { padding: 0.8rem 1.3rem; }
   .logo-marca { font-size: 1.05rem; letter-spacing: 0.35em; }
 
   .seccion-inicio { height: 100svh; }
   .titulo-principal { font-size: clamp(3.4rem, 15vw, 4.4rem); letter-spacing: 0.12em; }
+
   .subtitulo-heroe { font-size: 0.52rem; letter-spacing: 0.4em; margin-bottom: 1.2rem; }
   .frase-heroe { font-size: 0.95rem; margin-top: 1.1rem; margin-bottom: 2rem; padding: 0 0.5rem; }
 
@@ -828,6 +826,5 @@ body {
   .icono-red-social { width: 46px; height: 46px; }
   .pie-pagina { padding: 4rem 1.4rem 2.6rem; }
 
-  /* FIX: el marco decorativo se salía por la izquierda y generaba scroll horizontal */
   .marco-decorativo { left: 0; top: 0; }
 }
